@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://drtwaqhs2ddur"]
+[gd_scene load_steps=5 format=3 uid="uid://drtwaqhs2ddur"]
 
 [ext_resource type="Texture2D" uid="uid://5c7js1ulhav8" path="res://glitch_tile (4).png" id="1_m30i6"]
+[ext_resource type="Texture2D" uid="uid://dm0ya3nae7773" path="res://panda (1) (1).png" id="2_2vcl1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2vcl1"]
 texture = ExtResource("1_m30i6")
@@ -17,3 +18,9 @@ sources/5 = SubResource("TileSetAtlasSource_2vcl1")
 tile_set = SubResource("TileSet_gc0xh")
 format = 2
 layer_0/tile_data = PackedInt32Array(-65536, 5, 0, -65535, 5, 0, -65534, 5, 0, -1, 5, 0, -2, 5, 0, -3, 5, 0)
+
+[node name="Player" type="CharacterBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(5, -482)
+texture = ExtResource("2_2vcl1")
