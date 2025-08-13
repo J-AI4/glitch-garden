@@ -22,5 +22,5 @@ layer_0/tile_data = PackedInt32Array(-65536, 5, 0, -65535, 5, 0, -65534, 5, 0, -
 [node name="Player" type="CharacterBody2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
-position = Vector2(5, -482)
+position = Vector2(8, -482)
 texture = ExtResource("2_2vcl1")
