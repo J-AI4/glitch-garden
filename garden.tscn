@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://drtwaqhs2ddur"]
+[gd_scene load_steps=8 format=3 uid="uid://drtwaqhs2ddur"]
 
 [ext_resource type="Texture2D" uid="uid://5c7js1ulhav8" path="res://glitch_tile (4).png" id="1_m30i6"]
+[ext_resource type="Script" uid="uid://p4e1vgefsmp2" path="res://game_manager.gd" id="1_qb2l5"]
 [ext_resource type="Texture2D" uid="uid://dm0ya3nae7773" path="res://panda (1) (1).png" id="2_2vcl1"]
 [ext_resource type="Script" uid="uid://cnwpth0h43h1c" path="res://player.gd" id="2_gc0xh"]
 
@@ -8,20 +9,23 @@
 texture = ExtResource("1_m30i6")
 texture_region_size = Vector2i(310, 320)
 0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-155, -160, 155, -160, 155, 160, -155, 160)
 
 [sub_resource type="TileSet" id="TileSet_gc0xh"]
 tile_size = Vector2i(310, 320)
+physics_layer_0/collision_layer = 1
 sources/5 = SubResource("TileSetAtlasSource_2vcl1")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qb2l5"]
 size = Vector2(176, 294)
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_qb2l5")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_gc0xh")
 format = 2
-layer_0/tile_data = PackedInt32Array(-65536, 5, 0, -65534, 5, 0, -1, 5, 0, -2, 5, 0, -3, 5, 0, -4, 5, 0, -65535, 5, 0)
+layer_0/tile_data = PackedInt32Array(-65534, 5, 0, -65535, 5, 0, -65536, 5, 0, -1, 5, 0, -2, 5, 0, -3, 5, 0)
 
 [node name="Player" type="CharacterBody2D" parent="."]
 script = ExtResource("2_gc0xh")
@@ -33,3 +37,7 @@ texture = ExtResource("2_2vcl1")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(8, -482)
 shape = SubResource("RectangleShape2D_qb2l5")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-1, -648)
+zoom = Vector2(0.5, 0.5)
