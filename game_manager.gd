@@ -3,6 +3,7 @@ extends Node2D
 var plant_card_active = false
 var super_grow_card_active = false
 var bamboo_stack = {}
+var plant_uses = 0
 
 func get_nearest_tile():
 	var tilemap = $TileMap
@@ -17,17 +18,17 @@ func _on_plant_pressed() -> void:
 	super_grow_card_active = false
 	print("hello")
 	
-func _on_texture_button_pressed() -> void:
+func _on_super_grow_pressed() -> void:
 	super_grow_card_active = true
 	plant_card_active = false
-	
+			
 func _process(delta):
-	if plant_card_active and Input.is_action_just_pressed("ui-select"):
+	if plant_card_active and Input.is_action_just_pressed("ui_select"):
 		place_bamboo(1)
 	
-	if super_grow_card_active and Input.is_action_just_pressed("ui-select"):
+	if super_grow_card_active and Input.is_action_just_pressed("ui_select"):
 		place_bamboo(3)
-	
+
 func place_bamboo(amount):
 		var cell = get_nearest_tile()
 		var pos_key = Vector2(cell.x, cell.y)
@@ -52,3 +53,8 @@ func place_bamboo(amount):
 			bamboo.position = world_pos
 			$PlantsTileMap.add_child(bamboo)
 			world_pos.y -= tile_size.y
+			
+		if plant_card_active:
+			plant_uses += 1
+			if plant_uses >= 6:
+				$SuperGrow.visible = true
