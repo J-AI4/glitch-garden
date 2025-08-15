@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://drtwaqhs2ddur"]
+[gd_scene load_steps=13 format=3 uid="uid://drtwaqhs2ddur"]
 
 [ext_resource type="Texture2D" uid="uid://5c7js1ulhav8" path="res://glitch_tile (4).png" id="1_m30i6"]
 [ext_resource type="Script" uid="uid://p4e1vgefsmp2" path="res://game_manager.gd" id="1_qb2l5"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cnwpth0h43h1c" path="res://player.gd" id="2_gc0xh"]
 [ext_resource type="Texture2D" uid="uid://cona552yu7gtr" path="res://bamboo (2).png" id="5_i01nk"]
 [ext_resource type="Texture2D" uid="uid://dgt4bwh73px4s" path="res://plant_card-1.png.png" id="6_sdfy2"]
+[ext_resource type="Texture2D" uid="uid://dohst5i7t2p3i" path="res://super_grow_card-3.png.png" id="7_ago6t"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2vcl1"]
 texture = ExtResource("1_m30i6")
@@ -18,9 +19,6 @@ tile_size = Vector2i(310, 320)
 physics_layer_0/collision_layer = 1
 sources/5 = SubResource("TileSetAtlasSource_2vcl1")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qb2l5"]
-size = Vector2(176, 294)
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sdfy2"]
 texture = ExtResource("5_i01nk")
 texture_region_size = Vector2i(310, 320)
@@ -30,6 +28,9 @@ texture_region_size = Vector2i(310, 320)
 tile_size = Vector2i(310, 320)
 sources/0 = SubResource("TileSetAtlasSource_sdfy2")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qb2l5"]
+size = Vector2(176, 294)
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_qb2l5")
 
@@ -37,6 +38,10 @@ script = ExtResource("1_qb2l5")
 tile_set = SubResource("TileSet_gc0xh")
 format = 2
 layer_0/tile_data = PackedInt32Array(-65535, 5, 0, -65536, 5, 0, -1, 5, 0, -2, 5, 0, -3, 5, 0, -65534, 5, 0)
+
+[node name="PlantsTileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_ago6t")
+format = 2
 
 [node name="Player" type="CharacterBody2D" parent="."]
 script = ExtResource("2_gc0xh")
@@ -50,12 +55,8 @@ position = Vector2(8, -482)
 shape = SubResource("RectangleShape2D_qb2l5")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(361, -1142)
-zoom = Vector2(0.2, 0.2)
-
-[node name="PlantsTileMap" type="TileMap" parent="."]
-tile_set = SubResource("TileSet_ago6t")
-format = 2
+position = Vector2(2, -193)
+zoom = Vector2(0.5, 0.5)
 
 [node name="Plant" type="TextureButton" parent="."]
 clip_contents = true
@@ -67,4 +68,12 @@ texture_normal = ExtResource("6_sdfy2")
 stretch_mode = 3
 metadata/_edit_use_anchors_ = true
 
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = 126.0
+offset_top = 97.0
+offset_right = 366.0
+offset_bottom = 417.0
+texture_normal = ExtResource("7_ago6t")
+
 [connection signal="pressed" from="Plant" to="." method="_on_plant_pressed"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

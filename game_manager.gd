@@ -1,6 +1,7 @@
 extends Node2D
 
 var plant_card_active = false
+var super_grow_card_active = false
 var bamboo_stack = {}
 
 func get_nearest_tile():
@@ -13,10 +14,21 @@ func get_nearest_tile():
 
 func _on_plant_pressed() -> void:
 	plant_card_active = true
+	super_grow_card_active = false
 	print("hello")
-
+	
+func _on_texture_button_pressed() -> void:
+	super_grow_card_active = true
+	plant_card_active = false
+	
 func _process(delta):
-	if plant_card_active and Input.is_action_just_pressed("ui_select"):
+	if plant_card_active and Input.is_action_just_pressed("ui-select"):
+		place_bamboo(1)
+	
+	if super_grow_card_active and Input.is_action_just_pressed("ui-select"):
+		place_bamboo(3)
+	
+func place_bamboo(amount):
 		var cell = get_nearest_tile()
 		var pos_key = Vector2(cell.x, cell.y)
 		
@@ -34,7 +46,9 @@ func _process(delta):
 		
 		world_pos.y -= height * tile_size.y
 		
-		var bamboo = Sprite2D.new()
-		bamboo.texture = preload("res://bamboo (2).png")
-		bamboo.position = world_pos
-		$PlantsTileMap.add_child(bamboo)
+		for i in range(amount):
+			var bamboo = Sprite2D.new()
+			bamboo.texture = preload("res://bamboo (2).png")
+			bamboo.position = world_pos
+			$PlantsTileMap.add_child(bamboo)
+			world_pos.y -= tile_size.y
