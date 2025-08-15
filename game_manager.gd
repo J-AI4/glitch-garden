@@ -5,13 +5,15 @@ var bamboo_stack = {}
 
 func get_nearest_tile():
 	var tilemap = $TileMap
-	var panda_pos = $Player.position
-	var cell = tilemap.world_to_map(panda_pos)
+	var panda_pos = $Player.global_position
+	var local_pos = tilemap.to_local(panda_pos)
+	var cell = tilemap.local_to_map(local_pos)
 	return cell
 
 
 func _on_plant_pressed() -> void:
 	plant_card_active = true
+	print("hello")
 
 func _process(delta):
 	if plant_card_active and Input.is_action_just_pressed("ui_select"):
@@ -25,8 +27,11 @@ func _process(delta):
 		else:
 			bamboo_stack[pos_key] = 1
 
-		var tile_size = Vector2(31, 32)
-		var world_pos = $TileMap.map_to_world(cell)
+		var tile_size = Vector2(310, 320)
+		
+		var world_pos = $TileMap.map_to_local(cell)
+		world_pos.y -= tile_size.y + 320
+		
 		world_pos.y -= height * tile_size.y
 		
 		var bamboo = Sprite2D.new()
