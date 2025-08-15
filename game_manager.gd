@@ -23,7 +23,11 @@ func _on_super_grow_pressed() -> void:
 	super_grow_card_active = true
 	plant_card_active = false
 	remove_card_active = false
-
+	
+func _on_remove_pressed() -> void:
+	remove_card_active = true
+	plant_card_active = false
+	super_grow_card_active = false
 			
 func _process(delta):
 	if plant_card_active and Input.is_action_just_pressed("ui_select"):
@@ -68,8 +72,11 @@ func place_bamboo(amount):
 func remove_bamboo():
 	var cell = get_nearest_tile()
 	var pos_key = Vector2(cell.x, cell.y)
-	 
-func _on_remove_pressed() -> void:
-	remove_card_active = true
-	plant_card_active = false
-	super_grow_card_active = false
+	
+	if bamboo_stack.has(pos_key) and bamboo_stack[pos_key] > 0:
+		bamboo_stack[pos_key] -= 1
+		var children = $PlantsTileMap.get_children()
+		for i in range(children.size() - 1, -1, -1):
+			if children[i].position.x == $TileMap.map_to_local(cell).x:
+				children[i].queue_free()
+				break
