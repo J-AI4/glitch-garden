@@ -16,3 +16,8 @@ func _process(delta):
 	var lowest_y = min_bottom_y + half_height
 		
 	position.y = clamp(position.y + movement, -INF, lowest_y)
+	
+func _ready():
+	var camera_width = get_viewport_rect().size.x * zoom.x
+	var camera_height = get_viewport_rect().size.y * zoom.y
+	print("Camera Width:", camera_width, "Camera Height:", camera_height)

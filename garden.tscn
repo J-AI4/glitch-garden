@@ -1,14 +1,16 @@
-[gd_scene load_steps=15 format=3 uid="uid://drtwaqhs2ddur"]
+[gd_scene load_steps=17 format=3 uid="uid://drtwaqhs2ddur"]
 
 [ext_resource type="Texture2D" uid="uid://5c7js1ulhav8" path="res://glitch_tile (4).png" id="1_m30i6"]
 [ext_resource type="Script" uid="uid://p4e1vgefsmp2" path="res://game_manager.gd" id="1_qb2l5"]
 [ext_resource type="Texture2D" uid="uid://dm0ya3nae7773" path="res://panda (1) (1).png" id="2_2vcl1"]
 [ext_resource type="Script" uid="uid://cnwpth0h43h1c" path="res://player.gd" id="2_gc0xh"]
+[ext_resource type="Texture2D" uid="uid://bmb113vyf41yx" path="res://background.png" id="3_rje30"]
 [ext_resource type="Texture2D" uid="uid://cona552yu7gtr" path="res://bamboo (2).png" id="5_i01nk"]
 [ext_resource type="Script" uid="uid://diok5qp84nu1k" path="res://camera_2d.gd" id="6_j2q2a"]
 [ext_resource type="Texture2D" uid="uid://dgt4bwh73px4s" path="res://plant_card-1.png.png" id="6_sdfy2"]
 [ext_resource type="Texture2D" uid="uid://dohst5i7t2p3i" path="res://super_grow_card-3.png.png" id="7_ago6t"]
 [ext_resource type="Texture2D" uid="uid://dkarlxv5s170f" path="res://remove_card-4.png.png" id="8_yajlf"]
+[ext_resource type="Texture2D" uid="uid://cyduakb4ddimw" path="res://error.png" id="11_mnshv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2vcl1"]
 texture = ExtResource("1_m30i6")
@@ -36,6 +38,16 @@ size = Vector2(176, 294)
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_qb2l5")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(15, -673)
+zoom = Vector2(0.5, 0.5)
+script = ExtResource("6_j2q2a")
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D"]
+position = Vector2(5.04255e-05, -4.49419e-05)
+scale = Vector2(4, 4)
+texture = ExtResource("3_rje30")
+
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_gc0xh")
 format = 2
@@ -57,11 +69,6 @@ texture = ExtResource("2_2vcl1")
 position = Vector2(-9, -622)
 shape = SubResource("RectangleShape2D_qb2l5")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(15, -673)
-zoom = Vector2(0.5, 0.5)
-script = ExtResource("6_j2q2a")
-
 [node name="Plant" type="TextureButton" parent="."]
 clip_contents = true
 offset_left = -755.0
@@ -73,6 +80,7 @@ stretch_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="SuperGrow" type="TextureButton" parent="."]
+visible = false
 offset_left = -116.0
 offset_top = -547.0
 offset_right = 124.0
@@ -85,6 +93,11 @@ offset_top = -548.0
 offset_right = -189.0
 offset_bottom = -228.0
 texture_normal = ExtResource("8_yajlf")
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(14.9999, -673)
+scale = Vector2(4, 4)
+texture = ExtResource("11_mnshv")
 
 [connection signal="pressed" from="Plant" to="." method="_on_plant_pressed"]
 [connection signal="pressed" from="SuperGrow" to="." method="_on_super_grow_pressed"]

@@ -39,6 +39,11 @@ func _process(delta):
 	if remove_card_active and Input.is_action_just_pressed("ui_select"):
 		remove_bamboo()
 		
+	if $Player.global_position.y > 320:
+		$Background.visible = true
+	else:
+		$Background.visible = false
+		
 func place_bamboo(amount):
 		var cell = get_nearest_tile()
 		var pos_key = Vector2(cell.x, cell.y)
