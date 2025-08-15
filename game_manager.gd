@@ -1,6 +1,7 @@
 extends Node2D
 
 var plant_card_active = false
+var remove_card_active = false
 var super_grow_card_active = false
 var bamboo_stack = {}
 var plant_uses = 0
@@ -16,11 +17,13 @@ func get_nearest_tile():
 func _on_plant_pressed() -> void:
 	plant_card_active = true
 	super_grow_card_active = false
-	print("hello")
+	remove_card_active = false
 	
 func _on_super_grow_pressed() -> void:
 	super_grow_card_active = true
 	plant_card_active = false
+	remove_card_active = false
+
 			
 func _process(delta):
 	if plant_card_active and Input.is_action_just_pressed("ui_select"):
@@ -28,7 +31,10 @@ func _process(delta):
 	
 	if super_grow_card_active and Input.is_action_just_pressed("ui_select"):
 		place_bamboo(3)
-
+	
+	if remove_card_active and Input.is_action_just_pressed("ui_select"):
+		remove_bamboo()
+		
 func place_bamboo(amount):
 		var cell = get_nearest_tile()
 		var pos_key = Vector2(cell.x, cell.y)
@@ -58,3 +64,12 @@ func place_bamboo(amount):
 			plant_uses += 1
 			if plant_uses >= 6:
 				$SuperGrow.visible = true
+	
+func remove_bamboo():
+	var cell = get_nearest_tile()
+	var pos_key = Vector2(cell.x, cell.y)
+	 
+func _on_remove_pressed() -> void:
+	remove_card_active = true
+	plant_card_active = false
+	super_grow_card_active = false
