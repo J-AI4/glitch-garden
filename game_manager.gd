@@ -46,9 +46,9 @@ func place_bamboo(amount):
 		var height = 0
 		if bamboo_stack.has(pos_key):
 			height = bamboo_stack[pos_key]
-			bamboo_stack[pos_key] += 1
+			bamboo_stack[pos_key] += amount
 		else:
-			bamboo_stack[pos_key] = 1
+			bamboo_stack[pos_key] = amount
 
 		var tile_size = Vector2(310, 320)
 		
